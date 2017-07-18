@@ -1,0 +1,11 @@
+(ns daemon.core
+  (:require [clj-http.client :as client]))
+
+(def robot-motor-url "192.168.1.116:5000/move")
+
+(defn flap [speed]
+  (client/get robot-motor-url {:query-params {:motor 2 :amount 30}})
+  (Thread/sleep 1000)
+  (client/get robot-motor-url {:query-params {:motor 2 :amount -30}})
+  )
+
